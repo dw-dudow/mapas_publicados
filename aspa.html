@@ -5,16 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mapas Interativos - Dudow</title>
 
-  <!-- Fonte Proxima Nova -->
-  <style>
-    @font-face {
-      font-family: 'Proxima Nova';
-      src: local('Proxima Nova'), local('ProximaNova'),
-           url('https://fonts.cdnfonts.com/s/16367/ProximaNova-Regular.woff') format('woff');
-      font-weight: normal;
-      font-style: normal;
-    }
-  </style>
+  <!-- Fonte (alternativa à Proxima Nova via CDN) -->
+  <link href="https://fonts.googleapis.com/css2?family=Proxima+Nova:wght@400;700&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -22,63 +14,67 @@
     }
 
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
     body {
-      margin: 0;
-      font-family: 'Proxima Nova', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Proxima Nova', Arial, sans-serif;
       background-color: #929292;
       color: #fff;
-      padding-top: 120px;
+      padding-top: 100px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
+    /* === HEADER === */
     header {
       background: #2b2b2b;
-      height: 110px;
-      width: 100vw;
-      display: flex;
-      padding: 0 10%;
-      align-items: center;
-      justify-content: space-between;
+      width: 100%;
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 10;
-    }
-
-    .logo-container {
-      position: relative;
+      z-index: 999;
+      padding: 0 10%;
+      height: 100px;
       display: flex;
-      align-items: flex-start;
-    }
-
-    .logo-container img {
-      height: 63px;
-    }
-
-    .logo-container span {
-      position: absolute;
-      top: 40px;
-      left: 65px;
-      color: #fff;
-      font-size: 1.4rem;
-      font-weight: normal;
-      -webkit-font-smoothing: antialiased;
-      text-shadow: 0 0 1px rgba(0,0,0,0);
-      -webkit-text-stroke: 0.25px;
+      align-items: center;
+      justify-content: flex-start;
     }
 
     header h1 {
-      color: white;
-      font-size: 1.5rem;
-      margin: 0;
+      display: flex;
+      align-items: center;
     }
 
+    header h1 a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    header h1 img {
+      height: 63px;
+    }
+
+    header h1 span {
+      color: #fff;
+      font-size: 1.4rem;
+      font-weight: normal;
+      margin-left: 12px;
+      -webkit-font-smoothing: antialiased;
+      text-shadow: 0 0 1px rgba(0, 0, 0, 0);
+      -webkit-text-stroke: 0.25px;
+    }
+
+    /* === CONTEÚDO PRINCIPAL === */
     main {
       padding: 2rem 10%;
       max-width: 1400px;
       margin: auto;
+      flex: 1;
     }
 
     nav {
@@ -113,33 +109,36 @@
       background-color: white;
     }
 
+    /* === RODAPÉ === */
+    footer {
+      background-color: #2b2b2b;
+      color: #fff;
+      padding: 1rem 10%;
+      text-align: center;
+      font-size: 0.875rem;
+    }
+
+    footer a {
+      color: #ffa006;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
     @media (max-width: 768px) {
       header {
+        padding: 0 5%;
+        height: auto;
         flex-direction: column;
         align-items: flex-start;
-        height: auto;
-        padding: 1rem 5%;
+        gap: 0.5rem;
       }
 
-      header h1 {
-        margin-top: 0.5rem;
-        font-size: 1.25rem;
-      }
-
-      .logo-container {
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-      }
-
-      .logo-container img {
-        height: 50px;
-      }
-
-      .logo-container span {
-        position: static;
-        margin-left: 10px;
-        font-size: 1rem;
+      header h1 span {
+        font-size: 1.1rem;
+        margin-left: 8px;
       }
 
       nav {
@@ -149,17 +148,22 @@
       nav .button {
         width: 100%;
       }
+
+      footer {
+        padding: 1rem 5%;
+      }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="logo-container">
-      <img src="https://dudow.com.br/vendor/v2/img/header-logo.png" alt="Logo Dudow" />
-      <span>Educação pode mudar sua vida</span>
-    </div>
-    <h1>Mapas Interativos</h1>
+    <h1>
+      <a href="https://dudow.com.br" target="_blank">
+        <img src="https://dudow.com.br/vendor/v2/img/header-logo.png" alt="Dudow">
+        <span>Educação pode mudar sua vida</span>
+      </a>
+    </h1>
   </header>
 
   <main>
@@ -172,6 +176,10 @@
 
     <iframe id="map-container" src="mapa_paragominas.html?v=1" frameborder="0"></iframe>
   </main>
+
+  <footer>
+    © 2025 <a href="https://dudow.com.br" target="_blank">Dudow</a>. Todos os direitos reservados.
+  </footer>
 
   <script>
     function carregarMapa(arquivo) {
