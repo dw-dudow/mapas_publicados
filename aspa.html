@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mapas Interativos - Dudow</title>
 
-  <!-- Fonte (alternativa à Proxima Nova via CDN) -->
   <link href="https://fonts.googleapis.com/css2?family=Proxima+Nova:wght@400;700&display=swap" rel="stylesheet" />
 
   <style>
@@ -19,17 +18,20 @@
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
+      height: 100%;
+      width: 100%;
       font-family: 'Proxima Nova', Arial, sans-serif;
       background-color: #f0f0f0;
       color: #fff;
-      padding-top: 100px;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
     }
 
-    /* === HEADER === */
+    body {
+      display: flex;
+      flex-direction: column;
+      padding-top: 100px;
+    }
+
     header {
       background: #2b2b2b;
       width: 100%;
@@ -59,22 +61,12 @@
       height: 63px;
     }
 
-    header h1 span {
-      color: #fff;
-      font-size: 1.4rem;
-      font-weight: normal;
-      margin-left: 12px;
-      -webkit-font-smoothing: antialiased;
-      text-shadow: 0 0 1px rgba(0, 0, 0, 0);
-      -webkit-text-stroke: 0.25px;
-    }
-
-    /* === CONTEÚDO PRINCIPAL === */
     main {
       padding: 2rem 10%;
       max-width: 1400px;
       margin: auto;
       flex: 1;
+      width: 100%;
     }
 
     nav {
@@ -102,16 +94,14 @@
     }
 
     iframe {
-      width: 100vw;
-	  max-width:100%;
+      width: 100%;
       height: 75vh;
       border: 2px solid #ccc;
       border-radius: 8px;
       background-color: white;
-	  display: block;
+      display: block;
     }
 
-    /* === RODAPÉ === */
     footer {
       background-color: #2b2b2b;
       color: #fff;
@@ -138,11 +128,6 @@
         gap: 0.5rem;
       }
 
-      header h1 span {
-        font-size: 1.1rem;
-        margin-left: 8px;
-      }
-
       nav {
         flex-direction: column;
       }
@@ -155,6 +140,31 @@
         padding: 1rem 5%;
       }
     }
+
+    /* === MODO PAISAGEM NO CELULAR === */
+    @media screen and (orientation: landscape) and (max-height: 500px) {
+      header, footer, nav {
+        display: none !important;
+      }
+
+      body {
+        padding-top: 0 !important;
+      }
+
+      main {
+        padding: 0;
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      iframe {
+        width: 100vw;
+        height: 100vh;
+        border: none;
+        border-radius: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -163,7 +173,6 @@
     <h1>
       <a href="https://dudow.com.br" target="_blank">
         <img src="https://dudow.com.br/vendor/v2/img/header-logo.png" alt="Dudow">
-        
       </a>
     </h1>
   </header>
