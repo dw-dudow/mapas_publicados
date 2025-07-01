@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mapas Interativos - Dudow</title>
 
-  <!-- Fonte Proxima Nova (alternativa web-safe se necessário) -->
+  <!-- Fonte Proxima Nova -->
   <style>
     @font-face {
       font-family: 'Proxima Nova';
@@ -28,7 +28,7 @@
     body {
       margin: 0;
       font-family: 'Proxima Nova', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #D9D9D9;
+      background-color: #929292;
       color: #fff;
       padding-top: 120px;
     }
@@ -47,8 +47,26 @@
       z-index: 10;
     }
 
-    header img {
-      height: 60px;
+    .logo-container {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .logo-container img {
+      height: 63px;
+    }
+
+    .logo-container span {
+      position: absolute;
+      top: 40px;
+      left: 65px;
+      color: #fff;
+      font-size: 1.4rem;
+      font-weight: normal;
+      -webkit-font-smoothing: antialiased;
+      text-shadow: 0 0 1px rgba(0,0,0,0);
+      -webkit-text-stroke: 0.25px;
     }
 
     header h1 {
@@ -95,17 +113,33 @@
       background-color: white;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       header {
         flex-direction: column;
         align-items: flex-start;
-        padding: 1rem;
         height: auto;
+        padding: 1rem 5%;
       }
 
       header h1 {
         margin-top: 0.5rem;
-        text-align: left;
+        font-size: 1.25rem;
+      }
+
+      .logo-container {
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .logo-container img {
+        height: 50px;
+      }
+
+      .logo-container span {
+        position: static;
+        margin-left: 10px;
+        font-size: 1rem;
       }
 
       nav {
@@ -121,7 +155,10 @@
 <body>
 
   <header>
-    <img src="https://dudow.com.br/vendor/v2/img/header-logo.png" alt="Logo Dudow">
+    <div class="logo-container">
+      <img src="https://dudow.com.br/vendor/v2/img/header-logo.png" alt="Logo Dudow" />
+      <span>Educação pode mudar sua vida</span>
+    </div>
     <h1>Mapas Interativos</h1>
   </header>
 
