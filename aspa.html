@@ -4,42 +4,62 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mapas Interativos - Dudow</title>
+
+  <!-- Fonte Proxima Nova (alternativa web-safe se necessário) -->
   <style>
+    @font-face {
+      font-family: 'Proxima Nova';
+      src: local('Proxima Nova'), local('ProximaNova'),
+           url('https://fonts.cdnfonts.com/s/16367/ProximaNova-Regular.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  </style>
+
+  <style>
+    :root {
+      --color-dudow-rgb: 255, 160, 6;
+    }
+
     * {
       box-sizing: border-box;
     }
 
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f9f9f9;
-      color: #333;
+      font-family: 'Proxima Nova', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #929292;
+      color: #fff;
+      padding-top: 120px;
     }
 
     header {
-      background-color: #2a7ae2;
-      color: white;
-      padding: 1rem 2rem;
+      background: #2b2b2b;
+      height: 110px;
+      width: 100vw;
       display: flex;
+      padding: 0 10%;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10;
     }
 
     header img {
-      height: 48px;
+      height: 60px;
     }
 
     header h1 {
+      color: white;
       font-size: 1.5rem;
       margin: 0;
-      flex-grow: 1;
-      text-align: right;
     }
 
     main {
-      padding: 2rem;
-      max-width: 1200px;
+      padding: 2rem 10%;
+      max-width: 1400px;
       margin: auto;
     }
 
@@ -47,22 +67,24 @@
       margin-bottom: 1.5rem;
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 0.75rem;
     }
 
-    button {
-      padding: 0.6rem 1rem;
-      font-size: 1rem;
-      border: none;
-      border-radius: 5px;
-      background-color: #2a7ae2;
+    nav .button {
+      border-radius: 0.5rem;
+      background: rgba(var(--color-dudow-rgb), 0.9);
+      font-size: 0.875rem;
+      font-weight: normal;
       color: white;
+      padding: 0.75rem 1.25rem;
+      text-transform: none;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      border: none;
+      transition: background 0.2s ease;
     }
 
-    button:hover {
-      background-color: #1f5ec2;
+    nav .button:hover {
+      background: rgba(var(--color-dudow-rgb), 1);
     }
 
     iframe {
@@ -77,11 +99,21 @@
       header {
         flex-direction: column;
         align-items: flex-start;
+        padding: 1rem;
+        height: auto;
       }
 
       header h1 {
-        text-align: left;
         margin-top: 0.5rem;
+        text-align: left;
+      }
+
+      nav {
+        flex-direction: column;
+      }
+
+      nav .button {
+        width: 100%;
       }
     }
   </style>
@@ -89,17 +121,16 @@
 <body>
 
   <header>
-    <img src="img/logo_dudow.png" alt="Logo Dudow">
+    <img src="https://dudow.com.br/vendor/v2/img/header-logo.png" alt="Logo Dudow">
     <h1>Mapas Interativos</h1>
   </header>
 
   <main>
     <nav>
-      <button onclick="carregarMapa('mapa_parauapebas.html')">Parauapebas</button>
-      <button onclick="carregarMapa('mapa_paragominas.html')">Paragominas</button>
-      <button onclick="carregarMapa('mapa_marabá.html')">Marabá</button>
-      <button onclick="carregarMapa('mapa_canaã_dos_carajás.html')">Canaã dos Carajás</button>
-      <!-- Adicione mais mapas aqui -->
+      <button class="button" onclick="carregarMapa('mapa_parauapebas.html')">Parauapebas</button>
+      <button class="button" onclick="carregarMapa('mapa_paragominas.html')">Paragominas</button>
+      <button class="button" onclick="carregarMapa('mapa_marabá.html')">Marabá</button>
+      <button class="button" onclick="carregarMapa('mapa_canaã_dos_carajás.html')">Canaã dos Carajás</button>
     </nav>
 
     <iframe id="map-container" src="mapa_paragominas.html?v=1" frameborder="0"></iframe>
