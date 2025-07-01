@@ -89,4 +89,28 @@
 <body>
 
   <header>
-    <img src="img/logo_dudow_
+    <img src="img/logo_dudow.png" alt="Logo Dudow">
+    <h1>Mapas Interativos</h1>
+  </header>
+
+  <main>
+    <nav>
+      <button onclick="carregarMapa('mapa_parauapebas.html')">Parauapebas</button>
+      <button onclick="carregarMapa('mapa_paragominas.html')">Paragominas</button>
+      <button onclick="carregarMapa('mapa_marabá.html')">Marabá</button>
+      <button onclick="carregarMapa('mapa_canaã_dos_carajás.html')">Canaã dos Carajás</button>
+      <!-- Adicione mais mapas aqui -->
+    </nav>
+
+    <iframe id="map-container" src="mapa_paragominas.html?v=1" frameborder="0"></iframe>
+  </main>
+
+  <script>
+    function carregarMapa(arquivo) {
+      const timestamp = new Date().getTime();
+      document.getElementById('map-container').src = `${arquivo}?v=${timestamp}`;
+    }
+  </script>
+
+</body>
+</html>
