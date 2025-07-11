@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mapas Interativos - Dudow</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Proxima+Nova:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --color-dudow-rgb: 255, 160, 6;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: 'Proxima Nova', Arial, sans-serif;
+      background-color: #f0f0f0;
+      color: #fff;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      padding-top: 100px;
+    }
+
+    header {
+      background: #2b2b2b;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      padding: 0 10%;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    header h1 {
+      display: flex;
+      align-items: center;
+    }
+
+    header h1 a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    header h1 img {
+      height: 63px;
+    }
+
+    main {
+      padding: 2rem 10%;
+      max-width: 1400px;
+      margin: auto;
+      flex: 1;
+      width: 100%;
+    }
+
+    nav {
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    nav .button {
+      border-radius: 0.5rem;
+      background: rgba(var(--color-dudow-rgb), 0.9);
+      font-size: 0.875rem;
+      font-weight: normal;
+      color: white;
+      padding: 0.75rem 1.25rem;
+      text-transform: none;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s ease;
+    }
+
+    nav .button:hover {
+      background: rgba(var(--color-dudow-rgb), 1);
+    }
+
+    iframe {
+      width: 100%;
+      height: 75vh;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      background-color: white;
+      display: block;
+    }
+
+    footer {
+      background-color: #2b2b2b;
+      color: #fff;
+      padding: 1rem 10%;
+      text-align: center;
+      font-size: 0.875rem;
+    }
+
+    footer a {
+      color: #ffa006;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 0 5%;
+        height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      nav {
+        flex-direction: column;
+      }
+
+      nav .button {
+        width: 100%;
+      }
+
+      footer {
+        padding: 1rem 5%;
+      }
+    }
+
+    /* === MODO PAISAGEM NO CELULAR === */
+    @media screen and (orientation: landscape) and (max-height: 500px) {
+      header, footer, nav {
+        display: none !important;
+      }
+
+      body {
+        padding-top: 0 !important;
+      }
+
+      main {
+        padding: 0;
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      iframe {
+        width: 100vw;
+        height: 100vh;
+        border: none;
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>
+      <a href="https://dudow.com.br" target="_blank">
+        <img src="https://dudow.com.br/vendor/v2/img/header-logo.png" alt="Dudow">
+      </a>
+    </h1>
+  </header>
+
+  <main>
+    <nav>
+      <button class="button" onclick="carregarMapa('mapa_completo_Bauru.html')">Bauru</button>
+      
+      
+      
+    </nav>
+
+    <iframe id="map-container" src="mapa_completo_Paragominas.html?v=1" frameborder="0"></iframe>
+  </main>
+
+  <footer>
+    © 2025 <a href="https://dudow.com.br" target="_blank">Dudow</a>. Todos os direitos reservados.
+  </footer>
+
+  <script>
+    function carregarMapa(arquivo) {
+      const timestamp = new Date().getTime();
+      document.getElementById('map-container').src = `${arquivo}?v=${timestamp}`;
+    }
+  </script>
+
+</body>
+</html>
