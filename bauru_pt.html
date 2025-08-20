@@ -185,7 +185,13 @@
       
     </nav>
 
-    <iframe id="map-container" src="mapa_completo_Bauru_otimizado.html?v=1" frameborder="0"></iframe>
+    <iframe id="map-container" frameborder="0"></iframe>
+
+    <script>
+      const iframe = document.getElementById('map-container');
+      const timestamp = new Date().getTime();
+      iframe.src = `mapa_completo_Bauru_otimizado.html?v=${timestamp}`;
+    </script>
   </main>
 
   <footer>
