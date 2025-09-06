@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mapas Interativos - Sculapio</title>
+  <title>Mapas Interativos - Dudow</title>
 
   <!-- Fonte SFNS Display (fallbacks modernos) -->
   <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;700&display=swap" rel="stylesheet" />
@@ -65,7 +65,7 @@
 
     /* Logo responsivo */
     header h1 img {
-      max-height: 100px; /* controla altura máxima */
+      max-height: 100px;
       height: auto;
       width: auto;
       display: block;
@@ -136,44 +136,42 @@
 
     /* === HEADER E NAV MOBILE === */
     @media (max-width: 768px) {
+      body {
+        padding-top: 55px;
+      }
 
-        body {
-            padding-top: 55px; /* altura do header no celular */
-        }
+      header {
+        padding: 8px 5%;
+        height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 0.15rem;
+      }
 
-        /* Header responsivo */
-        header {
-            padding: 8px 5%;          /* padding menor, respira mas aproxima os elementos */
-            height: auto;             /* flexível */
-            flex-direction: column;   /* logo acima, nav abaixo */
-            align-items: flex-start;  
-            justify-content: center;  
-            gap: 0.15rem;             /* distância mínima entre logo e nav */
-            border-bottom: 1px solid var(--color-border);
-        }
+      header h1 img {
+        max-height: 50px;
+        width: auto;
+        display: block;
+      }
 
-        /* Logo responsivo */
-        header h1 img {
-            max-height: 50px;         /* reduz o logo para celular */
-            width: auto;
-            display: block;
-        }
+      nav {
+        margin-top: 0;
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+      }
 
-        /* Navegação vertical e próxima do logo */
-        nav {
-            margin-top: 0;            /* remove distância extra */
-            flex-direction: column;  
-            gap: 0.5rem;              /* espaço elegante entre botões */
-            width: 100%;              
-        }
+      nav .button {
+        width: 100%;
+        padding: 0.7rem 1rem;
+        font-size: 0.9rem;
+      }
 
-        nav .button {
-            width: 100%;              /* botões ocupam toda largura */
-            padding: 0.7rem 1rem;     /* menor padding para celular */
-            font-size: 0.9rem;        
-        }
+      footer {
+        padding: 1rem 5%;
+      }
     }
-    
 
     /* === MODO PAISAGEM NO CELULAR === */
     @media screen and (orientation: landscape) and (max-height: 500px) {
@@ -214,8 +212,10 @@
 
   <main>
     <nav>
-      <button class="button" onclick="carregarMapa('mapa_completo_Bauru_otimizado.html')">Bauru</button>
-      <button class="button" onclick="carregarMapa('mapa_escolas_Bauru_SP.html')">Busca Escolas</button>
+      <button class="button" onclick="carregarMapa('mapa_completo_Parauapebas_otimizado.html')">Parauapebas</button>
+      <button class="button" onclick="carregarMapa('mapa_completo_Marabá_otimizado.html')">Marabá</button>
+      <button class="button" onclick="carregarMapa('mapa_completo_Paragominas_otimizado.html')">Paragominas</button>
+      <button class="button" onclick="carregarMapa('mapa_completo_Canaã dos Carajás.html')">Canaã dos Carajás</button>
     </nav>
 
     <iframe id="map-container" frameborder="0"></iframe>
@@ -223,7 +223,7 @@
     <script>
       const iframe = document.getElementById('map-container');
       const timestamp = new Date().getTime();
-      iframe.src = `mapa_completo_Bauru_otimizado.html?v=${timestamp}`;
+      iframe.src = `mapa_completo_Marabá_otimizado.html?v=${timestamp}`;
     </script>
   </main>
 
