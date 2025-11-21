@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_c0be329cf494623bcbb5d948c730b475 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+</head>
+<body>
+    
+    
+<style>
+  /* Painel expandido */
+  .leaflet-control-layers-expanded {
+      width: 250px; /* opcional: largura fixa */
+      padding: 5px;
+  }
+
+  /* Campo Grande - MS fixo */
+  .leaflet-control-layers-overlays h4 {
+      margin: 0 0 5px 0;
+      padding: 5px;
+      font-weight: bold;
+      font-size: 14px;
+      background: #f0f0f0;
+      border-bottom: 1px solid #ccc;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+  }
+
+  /* Lista de escolas com scroll */
+  .leaflet-control-layers-list {
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 5px;
+  }
+
+  #layer-search {
+      width: 95%;
+      margin: 5px auto;
+      padding: 5px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      display: block;
+      font-size: 14px;
+  }
+</style>
+
+<input type="text" id="layer-search" placeholder="Buscar camadas..." title="Buscar camada pelo nome">
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      var input = document.getElementById('layer-search');
+      input.addEventListener('input', function() {
+          var termo = this.value.toLowerCase();
+          var labels = document.querySelectorAll('.leaflet-control-layers-list label');
+          labels.forEach(function(label) {
+              var text = label.textContent.toLowerCase();
+              label.style.display = text.indexOf(termo) > -1 ? "" : "none";
+          });
+      });
+  });
+</script>
+    
+            <div class="folium-map" id="map_c0be329cf494623bcbb5d948c730b475" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_c0be329cf494623bcbb5d948c730b475 = L.map(
+                "map_c0be329cf494623bcbb5d948c730b475",
+                {
+                    center: [-11.731169931578947, -49.07099803157895],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 13,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_edb2450f20a2ce52a5af3b0378696fa0 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Gurupi - TO",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_edb2450f20a2ce52a5af3b0378696fa0.addTo(map_c0be329cf494623bcbb5d948c730b475);
+        
+    
+            var marker_b5863b8d39a243f68bbb193f717e8a5f = L.marker(
+                [-11.7257154, -49.0693262],
+                {
+}
+            ).addTo(map_c0be329cf494623bcbb5d948c730b475);
+        
+    
+            var icon_be24160946cd5d324a9c5f5f7249d7ac = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_dd81bdcc294832d8027976a44f8b57e4 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4e1dc7f1587bd451418c142940813ace = $(`<div id="html_4e1dc7f1587bd451418c142940813ace" style="width: 100.0%; height: 100.0%;">     <b>COLEGIO BERNARDO SAYAO DE GURUPI</b><br>     Total de alunos: 565<br>     Creche: 47<br>     Pré-Escola: 48<br>     Fund. Anos Iniciais: 170<br>     Fund. Anos Finais: 173<br>     Ensino Médio: 127<br>     Profissionalizante: 0<br>     RUA PRESIDENTE JUSCELINO KUBITSCHEK, 973, SETOR CENTRAL, Gurupi - TO, Brasil     </div>`)[0];
+                popup_dd81bdcc294832d8027976a44f8b57e4.setContent(html_4e1dc7f1587bd451418c142940813ace);
+            
+        
+
+        marker_b5863b8d39a243f68bbb193f717e8a5f.bindPopup(popup_dd81bdcc294832d8027976a44f8b57e4)
+        ;
+
+        
+    
+    
+                marker_b5863b8d39a243f68bbb193f717e8a5f.setIcon(icon_be24160946cd5d324a9c5f5f7249d7ac);
+            
+    
+            var marker_4921a7832ec41df8ba9e63352cd8488f = L.marker(
+                [-11.7276087, -49.0718326],
+                {
+}
+            ).addTo(map_c0be329cf494623bcbb5d948c730b475);
+        
+    
+            var icon_ab727b9c9d6f03f95953741bb3907a5c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_36e060ad1a940f7b98f4d7925ed9ce7e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c379f5420125afbf744f98591e8c39e4 = $(`<div id="html_c379f5420125afbf744f98591e8c39e4" style="width: 100.0%; height: 100.0%;">     <b>CRECHE ESPIRITA PRE - ESCOLA MARIA MADALENA</b><br>     Total de alunos: 252<br>     Creche: 70<br>     Pré-Escola: 182<br>     Fund. Anos Iniciais: 0<br>     Fund. Anos Finais: 0<br>     Ensino Médio: 0<br>     Profissionalizante: 0<br>     RUA PRESIDENTE JUSCELINO KUBITSCHEK, 2360, SETOR CENTRAL, Gurupi - TO, Brasil     </div>`)[0];
+                popup_36e060ad1a940f7b98f4d7925ed9ce7e.setContent(html_c379f5420125afbf744f98591e8c39e4);
+            
+        
+
+        marker_4921a7832ec41df8ba9e63352cd8488f.bindPopup(popup_36e060ad1a940f7b98f4d7925ed9ce7e)
+        ;
+
+        
+    
+    
+                marker_4921a7832ec41df8ba9e63352cd8488f.setIcon(icon_ab727b9c9d6f03f95953741bb3907a5c);
+            
+    
+            var marker_fbf27c9f70f4c7e5a7fb421c865bc614 = L.marker(
+                [-11.732609, -49.064376],
+                {
+}
+            ).addTo(map_c0be329cf494623bcbb5d948c730b475);
+        
+    
+            var icon_c152ce46a1090d6f2085e384b4022931 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4d2abf5caaf210ba3d401a09c7d8c8e3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f7f98dd6a037defd43676865b99f1f41 = $(`<div id="html_f7f98dd6a037defd43676865b99f1f41" style="width: 100.0%; height: 100.0%;">     <b>CENTRO EDUCACIONAL DE GURUPI</b><br>     Total de alunos: 214<br>     Creche: 0<br>     Pré-Escola: 0<br>     Fund. Anos Iniciais: 0<br>     Fund. Anos Finais: 112<br>     Ensino Médio: 102<br>     Profissionalizante: 0<br>     AVENIDA CEARA, 1843, SETOR CENTRAL, Gurupi - TO, Brasil     </div>`)[0];
+                popup_4d2abf5caaf210ba3d401a09c7d8c8e3.setContent(html_f7f98dd6a037defd43676865b99f1f41);
+            
+        
+
+        marker_fbf27c9f70f4c7e5a7fb421c865bc614.bindPopup(popup_4d2abf5caaf210ba3d401a09c7d8c8e3)
+        ;
+
+        
+    
+    
+                marker_fbf27c9f70f4c7e5a7fb421c865bc614.setIcon(icon_c152ce46a1090d6f2085e384b4022931);
+            
+    
+            var marker_a77a092a05e70963ebb0672f799411c9 = L.marker(
+                [-11.7331199, -49.0607948],
+                {
+}
+            ).addTo(map_c0be329cf494623bcbb5d948c730b475);
+        
+    
+        var icon_261649c84a7816f063795fd128bffe9c = L.icon({
+  "iconUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAU4AAAFOCAYAAADpU/RpAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAEvGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSfvu78nIGlkPSdXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQnPz4KPHg6eG1wbWV0YSB4bWxuczp4PSdhZG9iZTpuczptZXRhLyc+CjxyZGY6UkRGIHhtbG5zOnJkZj0naHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyc+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczpBdHRyaWI9J2h0dHA6Ly9ucy5hdHRyaWJ1dGlvbi5jb20vYWRzLzEuMC8nPgogIDxBdHRyaWI6QWRzPgogICA8cmRmOlNlcT4KICAgIDxyZGY6bGkgcmRmOnBhcnNlVHlwZT0nUmVzb3VyY2UnPgogICAgIDxBdHRyaWI6Q3JlYXRlZD4yMDI1LTA3LTEwPC9BdHRyaWI6Q3JlYXRlZD4KICAgICA8QXR0cmliOkV4dElkPmNkNWM0MmNmLTcxNjItNGE5My1iMTE3LTc5M2MzMGQ4YTYwZDwvQXR0cmliOkV4dElkPgogICAgIDxBdHRyaWI6RmJJZD41MjUyNjU5MTQxNzk1ODA8L0F0dHJpYjpGYklkPgogICAgIDxBdHRyaWI6VG91Y2hUeXBlPjI8L0F0dHJpYjpUb3VjaFR5cGU+CiAgICA8L3JkZjpsaT4KICAgPC9yZGY6U2VxPgogIDwvQXR0cmliOkFkcz4KIDwvcmRmOkRlc2NyaXB0aW9uPgoKIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PScnCiAgeG1sbnM6ZGM9J2h0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvJz4KICA8ZGM6dGl0bGU+CiAgIDxyZGY6QWx0PgogICAgPHJkZjpsaSB4bWw6bGFuZz0neC1kZWZhdWx0Jz5EZXNpZ24gc2VtIG5vbWUgLSAxPC9yZGY6bGk+CiAgIDwvcmRmOkFsdD4KICA8L2RjOnRpdGxlPgogPC9yZGY6RGVzY3JpcHRpb24+CgogPHJkZjpEZXNjcmlwdGlv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",
+  "iconSize": [42, 42],
+  "iconAnchor": [21, 42],
+  "popupAnchor": [0, -36],
+});
+        
+    
+        var popup_74824501141cde0e8bc2c8ec9fbb0bf1 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ab4fa15412d33dac884c4fffea4dca95 = $(`<div id="html_ab4fa15412d33dac884c4fffea4dca95" style="width: 100.0%; height: 100.0%;">     <b>COLEGIO ADVENTISTA DE GURUPI</b><br>     Total de alunos: 813<br>     Creche: 73<br>     Pré-Escola: 96<br>     Fund. Anos Iniciais: 306<br>     Fund. Anos Finais: 228<br>     Ensino Médio: 110<br>     Profissionalizante: 0<br>     RUA PRESIDENTE CASTELO BRANCO, 2061, SETOR CENTRAL, Gurupi - TO, Brasil     </div>`)[0];
+                popup_74824501141cde0e8bc2c8ec9fbb0bf1.setContent(html_ab4fa15412d33dac884c4fffea4dca95);
+            
+        
+
+        marker_a77a092a05e70963ebb0672f799411c9.bindPopup(popup_74824501141cde0e8bc2c8ec9fbb0bf1)
+        ;
+
+        
+    
+    
+                marker_a77a092a05e70963ebb0672f799411c9.setIcon(icon_261649c84a7816f063795fd128bffe9c);
+            
+    
+            var marker_81ec11d3e67f6c7f1a78e65bcbb5a2bf = L.marker(
+                [-11.7283752, -49.0686083],
+                {
+}
+            ).addTo(map_c0be329cf494623bcbb5d948c730b475);
+        
+    
+            var icon_7496fe6fdaabc241a6d2b6acd6342d0c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d949e941820519eea24f99a5c1505d47 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a65278a6ddbd1a61d26f58fb3d20031c = $(`<div id="html_a65278a6ddbd1a61d26f58fb3d20031c" style="width: 100.0%; height: 100.0%;">     <b>ASSOCIACAO DE APOIO A ESCOLA ESPECIAL SAO FRANCISCO DE ASSIS</b><br>     Total de alunos: 8<br>     Creche: 0<br>     Pré-Escola: 0<br>     Fund. Anos Iniciais: 8<br>     Fund. Anos Finais: 0<br>     Ensino Médio: 0<br>     Profissionalizante: 0<br>     AVENIDA CENTRAL E, 370, WALDIR LINS II, Gurupi - TO, Brasil     </div>`)[0];
+                popup_d949e941820519eea24f99a5c1505d47.setContent(html_a65278a6ddbd1a61d26f58fb3d20031c);
+            
+        
+
+        marker_81ec11d3e67f6c7f1a78e65bcbb5a2bf.bindPopup(popup_d949e941820519eea24f99a5c1505d47)
+        ;
+
+        
+    
+    
+                marker_81ec11d3e67f6c7f1a78e65bcbb5a2bf.setIcon(icon_7496fe6fdaabc241a6d2b6acd6342d0c);
+            
+    
+            var marker_fb2acd1c3fc4bc668a9fca0db66425ef = L.marker(
+                [-11.7270821, -49.0746104],
+                {
+}
+            ).addTo(map_c0be329cf494623bcbb5d948c730b475);
+        
+    
+            var icon_d1ac2386a3a06b220a7ec053e95764e4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_984e87f1baf4e962be04d71ac1d55ecd = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ad3ec45f9736a442fb548ae7dab2e2a6 = $(`<div id="html_ad3ec45f9736a442fb548ae7dab2e2a6" style="width: 100.0%; height: 100.0%;">     <b>ESCOLA SAGRADO CORACAO DE MARIA</b><br>     Total de alunos: 144<br>     Creche: 6<br>     Pré-Escola: 31<br>     Fund. Anos Iniciais: 107<br>     Fund. Anos Finais: 0<br>     Ensino Médio: 0<br>     Profissionalizante: 0<br>     AVENIDA PARANA, 1660, SETOR CENTRAL, Gurupi - TO, Brasil     </div>`)[0];
+                popup_984e87f1baf4e962be04d71ac1d55ecd.setContent(html_ad3ec45f9736a442fb548ae7dab2e2a6);
+            
+        
+
+        marker_fb2acd1c3fc4bc668a9fca0db66425ef.bindPopup(popup_984e87f1baf4e962be04d71ac1d55ecd)
+        ;
+
+        
+    
+    
+                marker_fb2acd1c3fc4bc668a9fca0db66425ef.setIcon(icon_d1ac2386a3a06b220a7ec053e95764e4);
+            
+    
+            var marker_b3d9ccdf9e58717f2801ccd43cb6ed78 = L.marker(
+                [-11.7458283, -49.0808548],
+                {
+}
+            ).addTo(map_c0be329cf494623bcbb5d948c730b475);
+        
+    
+            var icon_a1400a819169fc3b86da046ebb080832 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_91352f2c2316f93614cfc5a94feb034a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_fffc1e311b10222f645ab6e06224a9b2 = $(`<div id="html_fffc1e311b10222f645ab6e06224a9b2" style="width: 100.0%; height: 100.0%;">     <b>RV EDUCACIONAL LTDA</b><br>     Total de alunos: 188<br>     Creche: 13<br>     Pré-Escola: 43<br>     Fund. Anos Iniciais: 132<br>     Fund. Anos Finais: 0<br>     Ensino Médio: 0<br>     Profissionalizante: 0<br>     AVENIDA CEARA, 1843, SETOR CENTRAL, Gurupi - TO, Brasil     </div>`)[0];
+                popup_91352f2c2316f93614cfc5a94feb034a.setContent(html_fffc1e311b10222f645ab6e06224a9b2);
+            
+        
+
+        marker_b3d9ccdf9e58717f2801ccd43cb6ed78.bindPopup(popup_91352f2c2316f93614cfc5a94feb034a)
+        ;
+
+        
+    
+    
+                marker_b3d9ccdf9e58717f2801ccd43cb6ed78.setIcon(icon_a1400a819169fc3b86da046ebb080832);
+            
+    
+            var marker_cf5938c2739c2159b8c4aa447f2ee39f = L.marker(
+                [-11.7453043, -49.06194290000001],
+                {
+}
+            ).addTo(map_c0be329cf494623bcbb5d948c730b475);
+        
+    
+            var icon_83f30725233bbd9876242827c92fbd88 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5281064143fc223193ded82ab8a3d5ba = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_206feae8f3b28f49a0186583b2fe153e = $(`<div id="html_206feae8f3b28f49a0186583b2fe153e" style="width: 100.0%; height: 100.0%;">     <b>INSTITUICAO BENEFICENTE IRMA DULCE</b><br>     Total de alunos: 165<br>     Creche: 80<br>     Pré-Escola: 85<br>     Fund. Anos Iniciais: 0<br>     Fund. Anos Finais: 0<br>     Ensino Médio: 0<br>     Profissionalizante: 0<br>     RUA N-009, 390, SETOR NOVO HORIZONTE, Gurupi - TO, Brasil     </div>`)[0];
+                popup_5281064143fc223193ded82ab8a3d5ba.setContent(html_206feae8f3b28f49a0186583b2fe153e);
+            
+        
+
+        marker_cf5938c2739c2159b8c4aa447f2ee39f.bindPopup(popup_5281064143fc223193ded82ab8a3d5ba)
+        ;
+
+        
+    
+    
+                marker_cf5938c2739c2159b8c4aa447f2ee39f.setIcon(icon_83f30725233bbd9876242827c92fbd88);
+            
+    
+            var marker_82d9af0fe8ac66e0df56d317fecc605d = L.marker(
+                [-11.7343819, -49.05166819999999],
+                {
+}
+            ).addTo(map_c0be329cf494623bcbb5d948c730b475);
+        
+    
+            var icon_7ba4e1c4c7e2959c27fa47d352d3e369 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_084f1fd54436bb820a1ce97c58e52629 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e3c8f0dfb27b77f843638b98fd13d3da = $(`<div id="html_e3c8f0dfb27b77f843638b98fd13d3da" style="width: 100.0%; height: 100.0%;">     <b>CENTRO EDUCACIONAL GOTINHAS DO SABER LTDA ME</b><br>     Total de alunos: 255<br>     Creche: 35<br>     Pré-Escola: 62<br>     Fund. Anos Iniciais: 158<br>     Fund. Anos Finais: 0<br>     Ensino Médio: 0<br>     Profissionalizante: 0<br>     AVENIDA GUAPORE, 1361, SETOR CENTRAL, Gurupi - TO, Brasil     </div>`)[0];
+                popup_084f1fd54436bb820a1ce97c58e52629.setContent(html_e3c8f0dfb27b77f843638b98fd13d3da);
+            
+        
+
+        marker_82d9af0fe8ac66e0df56d317fecc605d.bindPopup(popup_084f1fd54436bb820a1ce97c58e52629)
+        ;
+
+        
+    
+    
+                marker_82d9af0fe8ac66e0df56d317fecc605d.setIcon(icon_7ba4e1c4c7e2959c27fa47d352d3e369);
+            
+    
+            var marker_ded0ec5bdc277780625454cd467b2385 = L.marker(
+                [-11.7225625, -49.08356250000001],
+                {
+}
+            ).addTo(map_c0be329cf494623bcbb5d948c730b475);
+        
+    
+            var icon_c0781e30edeb0e16c88f22812a68d8a2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_dc8910c1e127ad9cab38a30697407525 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_66ecf350b0f0cc3d7371218308ae3da1 = $(`<div id="html_66ecf350b0f0cc3d7371218308ae3da1" style="width: 100.0%; height: 100.0%;">     <b>CET-SESI CENTRO DE ENS TRAB-SERV SOCIAL DA IND</b><br>     Total de alunos: 93<br>     Creche: 0<br>     Pré-Escola: 0<br>     Fund. Anos Iniciais: 0<br>     Fund. Anos Finais: 0<br>     Ensino Médio: 93<br>     Profissionalizante: 0<br>     RUA JOAQUIM BATISTA DE OLIVEIRA, 161, VILA ALAGOANA, Gurupi - TO, Brasil     </div>`)[0];
+                popup_dc8910c1e127ad9cab38a30697407525.setContent(html_66ecf350b0f0cc3d7371218308ae3da1);
+            
+        
+
+        marker_ded0ec5bdc277780625454cd467b2385.bindPopup(popup_dc8910c1e127ad9cab38a30697407525)
+        ;
+
+        
+    
+    
+                marker_ded0ec5bdc277780625454cd467b2385.setIcon(icon_c0781e30edeb0e16c88f22812a68d8a2);
+            
+    
+            var marker_9eac205b0e87c66326e1b6b20469ff4a = L.marker(
+                [-11.7288817, -49.0817629],
+                {
+}
+            ).addTo(map_c0be329cf494623bcbb5d948c730b475);
+        
+    
+            var icon_1e0a6889a66f2de0d783e4e8cb8edab7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_cd63773f0d8f2c89a21e7130190341e5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e9a5f9858af5d6408e78bab412b7a0cd = $(`<div id="html_e9a5f9858af5d6408e78bab412b7a0cd" style="width: 100.0%; height: 100.0%;">     <b>EDUCANDARIO EVANGELICO EBENEZER</b><br>     Total de alunos: 556<br>     Creche: 19<br>     Pré-Escola: 91<br>     Fund. Anos Iniciais: 266<br>     Fund. Anos Finais: 180<br>     Ensino Médio: 0<br>     Profissionalizante: 0<br>     RUA 3, S/Nº, JARDIM ELDORADO, Gurupi - TO, Brasil     </div>`)[0];
+                popup_cd63773f0d8f2c89a21e7130190341e5.setContent(html_e9a5f9858af5d6408e78bab412b7a0cd);
+            
+        
+
+        marker_9eac205b0e87c66326e1b6b20469ff4a.bindPopup(popup_cd63773f0d8f2c89a21e7130190341e5)
+        ;
+
+        
+    
+    
+                marker_9eac205b0e87c66326e1b6b20469ff4a.setIcon(icon_1e0a6889a66f2de0d783e4e8cb8edab7);
+            
+    
+            var marker_c4091e9b8144326ccd186eaf36a14ce3 = L.marker(
+                [-11.7296356, -49.0603274],
+                {
+}
+            ).addTo(map_c0be329cf494623bcbb5d948c730b475);
+        
+    
+            var icon_42fc1db55b75c02d40dfcb409cbaccb5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0ffdac470298f06d3ac28ed180cf4212 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c60836319f81b0f68868dc7490507d07 = $(`<div id="html_c60836319f81b0f68868dc7490507d07" style="width: 100.0%; height: 100.0%;">     <b>ESCOLA INFANTIL CANTINHO FELIZ</b><br>     Total de alunos: 127<br>     Creche: 10<br>     Pré-Escola: 51<br>     Fund. Anos Iniciais: 66<br>     Fund. Anos Finais: 0<br>     Ensino Médio: 0<br>     Profissionalizante: 0<br>     AVENIDA CEARA, 1345, SETOR CENTRAL, Gurupi - TO, Brasil     </div>`)[0];
+                popup_0ffdac470298f06d3ac28ed180cf4212.setContent(html_c60836319f81b0f68868dc7490507d07);
+            
+        
+
+        marker_c4091e9b8144326ccd186eaf36a14ce3.bindPopup(popup_0ffdac470298f06d3ac28ed180cf4212)
+        ;
+
+        
+    
+    
+                marker_c4091e9b8144326ccd186eaf36a14ce3.setIcon(icon_42fc1db55b75c02d40dfcb409cbaccb5);
+            
+    
+            var marker_88f3120c80dc7792dbe851af7e68325f = L.marker(
+                [-11.7210366, -49.0738897],
+                {
+}
+            ).addTo(map_c0be329cf494623bcbb5d948c730b475);
+        
+    
+            var icon_cf39b9cfa28610f6c06804372592b2e5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ddbbeb6e185575f7c2893599dd9600b6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_00e095b278be24bf073c2a5c471abd1f = $(`<div id="html_00e095b278be24bf073c2a5c471abd1f" style="width: 100.0%; height: 100.0%;">     <b>SESC ESCOLA</b><br>     Total de alunos: 337<br>     Creche: 79<br>     Pré-Escola: 90<br>     Fund. Anos Iniciais: 168<br>     Fund. Anos Finais: 0<br>     Ensino Médio: 0<br>     Profissionalizante: 0<br>     RUA 3, 415, PARK FILO MOREIRA, Gurupi - TO, Brasil     </div>`)[0];
+                popup_ddbbeb6e185575f7c2893599dd9600b6.setContent(html_00e095b278be24bf073c2a5c471abd1f);
+            
+        
+
+        marker_88f3120c80dc7792dbe851af7e68325f.bindPopup(popup_ddbbeb6e185575f7c2893599dd9600b6)
+        ;
+
+        
+    
+    
+                marker_88f3120c80dc7792dbe851af7e68325f.setIcon(icon_cf39b9cfa28610f6c06804372592b2e5);
+            
+    
+            var marker_7b3187c0085a3cdc078b423ba732ed66 = L.marker(
+                [-11.7363208, -49.06160819999999],
+                {
+}
+            ).addTo(map_c0be329cf494623bcbb5d948c730b475);
+        
+    
+            var icon_af725b23a78231f86c8adb677fd95bce = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0d73c828125147a4dedf443edfe6efb2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8dab75c39bb4b7e4ca8a8be55094a9c8 = $(`<div id="html_8dab75c39bb4b7e4ca8a8be55094a9c8" style="width: 100.0%; height: 100.0%;">     <b>ASSOCIACAO BERCARIO ESPIRITA MARIA DE NAZARE</b><br>     Total de alunos: 76<br>     Creche: 76<br>     Pré-Escola: 0<br>     Fund. Anos Iniciais: 0<br>     Fund. Anos Finais: 0<br>     Ensino Médio: 0<br>     Profissionalizante: 0<br>     AVENIDA BRASILIA, 2245, SETOR CENTRAL, Gurupi - TO, Brasil     </div>`)[0];
+                popup_0d73c828125147a4dedf443edfe6efb2.setContent(html_8dab75c39bb4b7e4ca8a8be55094a9c8);
+            
+        
+
+        marker_7b3187c0085a3cdc078b423ba732ed66.bindPopup(popup_0d73c828125147a4dedf443edfe6efb2)
+        ;
+
+        
+    
+    
+                marker_7b3187c0085a3cdc078b423ba732ed66.setIcon(icon_af725b23a78231f86c8adb677fd95bce);
+            
+    
+            var marker_89669d3075f2ba48ecaf7fa18fa219fc = L.marker(
+                [-11.7267064, -49.0665878],
+                {
+}
+            ).addTo(map_c0be329cf494623bcbb5d948c730b475);
+        
+    
+            var icon_5ae7409fabd8c4bc64512f27e070e3ec = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_80c67f8786cb1130ec452f6dc0475311 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_92185d81329a329edab6e6d7524c0d2a = $(`<div id="html_92185d81329a329edab6e6d7524c0d2a" style="width: 100.0%; height: 100.0%;">     <b>COLEGIO GENIUS</b><br>     Total de alunos: 247<br>     Creche: 39<br>     Pré-Escola: 24<br>     Fund. Anos Iniciais: 72<br>     Fund. Anos Finais: 57<br>     Ensino Médio: 55<br>     Profissionalizante: 0<br>     AV PARA, 1144, CENTRO, Gurupi - TO, Brasil     </div>`)[0];
+                popup_80c67f8786cb1130ec452f6dc0475311.setContent(html_92185d81329a329edab6e6d7524c0d2a);
+            
+        
+
+        marker_89669d3075f2ba48ecaf7fa18fa219fc.bindPopup(popup_80c67f8786cb1130ec452f6dc0475311)
+        ;
+
+        
+    
+    
+                marker_89669d3075f2ba48ecaf7fa18fa219fc.setIcon(icon_5ae7409fabd8c4bc64512f27e070e3ec);
+            
+    
+            var marker_5ea4ae309a25c99e6e235ea0fced6e4b = L.marker(
+                [-11.7294375, -49.0826875],
+                {
+}
+            ).addTo(map_c0be329cf494623bcbb5d948c730b475);
+        
+    
+            var icon_01d88a988447971deed97c4a4fe2452a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_683602a893c828d2aa92c2d2fa9ce934 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_825523566e4f8c65ac1eb3202b0a1c94 = $(`<div id="html_825523566e4f8c65ac1eb3202b0a1c94" style="width: 100.0%; height: 100.0%;">     <b>INSTITUTO EVANGELICO EDUCACIONAL OS PEQUENINOS DE JESUS</b><br>     Total de alunos: 182<br>     Creche: 53<br>     Pré-Escola: 55<br>     Fund. Anos Iniciais: 74<br>     Fund. Anos Finais: 0<br>     Ensino Médio: 0<br>     Profissionalizante: 0<br>     RUA NEWTON DA ROCHA, 81, VILA ALAGOANA, Gurupi - TO, Brasil     </div>`)[0];
+                popup_683602a893c828d2aa92c2d2fa9ce934.setContent(html_825523566e4f8c65ac1eb3202b0a1c94);
+            
+        
+
+        marker_5ea4ae309a25c99e6e235ea0fced6e4b.bindPopup(popup_683602a893c828d2aa92c2d2fa9ce934)
+        ;
+
+        
+    
+    
+                marker_5ea4ae309a25c99e6e235ea0fced6e4b.setIcon(icon_01d88a988447971deed97c4a4fe2452a);
+            
+    
+            var marker_740de57fd792a10a68f37041478c79d9 = L.marker(
+                [-11.7452793, -49.0613158],
+                {
+}
+            ).addTo(map_c0be329cf494623bcbb5d948c730b475);
+        
+    
+            var icon_04c54b95cc333ab59accbb53e5f8ca89 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8ff36fc036f37de705fb9c189bc8771f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4781a3e62974f00136bdf60c8c1b84fb = $(`<div id="html_4781a3e62974f00136bdf60c8c1b84fb" style="width: 100.0%; height: 100.0%;">     <b>SESCLER - SERVICO SOCIAL DO COMERCIO</b><br>     Total de alunos: 65<br>     Creche: 19<br>     Pré-Escola: 46<br>     Fund. Anos Iniciais: 0<br>     Fund. Anos Finais: 0<br>     Ensino Médio: 0<br>     Profissionalizante: 0<br>     RUA 9, 60, PARQUE PRIMAVERA, Gurupi - TO, Brasil     </div>`)[0];
+                popup_8ff36fc036f37de705fb9c189bc8771f.setContent(html_4781a3e62974f00136bdf60c8c1b84fb);
+            
+        
+
+        marker_740de57fd792a10a68f37041478c79d9.bindPopup(popup_8ff36fc036f37de705fb9c189bc8771f)
+        ;
+
+        
+    
+    
+                marker_740de57fd792a10a68f37041478c79d9.setIcon(icon_04c54b95cc333ab59accbb53e5f8ca89);
+            
+    
+            var marker_d8e1462962970691bcc09326996feb01 = L.marker(
+                [-11.7231886, -49.08437989999999],
+                {
+}
+            ).addTo(map_c0be329cf494623bcbb5d948c730b475);
+        
+    
+            var icon_e8fca5cf1db3e53266245db0256e4c55 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_530da394f855ffda821a1bc465bc1f9d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f49a669bb4ffbbabc8ff5e3d846a6eb4 = $(`<div id="html_f49a669bb4ffbbabc8ff5e3d846a6eb4" style="width: 100.0%; height: 100.0%;">     <b>INSTITUTO EDUCACIONAL PASSO A PASSO</b><br>     Total de alunos: 122<br>     Creche: 7<br>     Pré-Escola: 43<br>     Fund. Anos Iniciais: 72<br>     Fund. Anos Finais: 0<br>     Ensino Médio: 0<br>     Profissionalizante: 0<br>     AVENIDA FERNANDO DE NORONHA, S/N, JARDIM TROPICAL, Gurupi - TO, Brasil     </div>`)[0];
+                popup_530da394f855ffda821a1bc465bc1f9d.setContent(html_f49a669bb4ffbbabc8ff5e3d846a6eb4);
+            
+        
+
+        marker_d8e1462962970691bcc09326996feb01.bindPopup(popup_530da394f855ffda821a1bc465bc1f9d)
+        ;
+
+        
+    
+    
+                marker_d8e1462962970691bcc09326996feb01.setIcon(icon_e8fca5cf1db3e53266245db0256e4c55);
+            
+    
+            var marker_c058fcd1e0bd1f094bb09b432ad58f9e = L.marker(
+                [-11.7291549, -49.0888267],
+                {
+}
+            ).addTo(map_c0be329cf494623bcbb5d948c730b475);
+        
+    
+            var icon_b091b8c09bca280a0b6413488c60dba9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3e459ecce2c8e58f18d38983d6389c69 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_22537c86c3ea0cf487dfdd62ccdce970 = $(`<div id="html_22537c86c3ea0cf487dfdd62ccdce970" style="width: 100.0%; height: 100.0%;">     <b>CENTRO EDUCACIONAL PINGO DE GENTE</b><br>     Total de alunos: 91<br>     Creche: 27<br>     Pré-Escola: 25<br>     Fund. Anos Iniciais: 39<br>     Fund. Anos Finais: 0<br>     Ensino Médio: 0<br>     Profissionalizante: 0<br>     RUA HORACIO JOAQUIM LEMES, 162, ALTO DA BOA VISTA, Gurupi - TO, Brasil     </div>`)[0];
+                popup_3e459ecce2c8e58f18d38983d6389c69.setContent(html_22537c86c3ea0cf487dfdd62ccdce970);
+            
+        
+
+        marker_c058fcd1e0bd1f094bb09b432ad58f9e.bindPopup(popup_3e459ecce2c8e58f18d38983d6389c69)
+        ;
+
+        
+    
+    
+                marker_c058fcd1e0bd1f094bb09b432ad58f9e.setIcon(icon_b091b8c09bca280a0b6413488c60dba9);
+            
+    
+            var feature_group_730789bd95098397afe003655250a37b = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_49db8c48d4b7f21737ac8ff806d3d3e7 = L.heatLayer(
+                [[-11.7331199, -49.0607948]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 18,
+  "radius": 18,
+  "blur": 0,
+  "gradient": {
+  0.0: "gray",
+  0.4: "gray",
+  0.75: "gray",
+  1.0: "black",
+},
+}
+            );
+        
+    
+            heat_map_49db8c48d4b7f21737ac8ff806d3d3e7.addTo(feature_group_730789bd95098397afe003655250a37b);
+        
+    
+            var feature_group_c28f49fc9fe55f117d26bc91a28521ea = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_2fcba4c3dfd0a6a2463746095118c11e = L.heatLayer(
+                [[-11.7257154, -49.0693262]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 18,
+  "radius": 18,
+  "blur": 0,
+  "gradient": {
+  0.0: "gray",
+  0.4: "gray",
+  0.75: "gray",
+  1.0: "black",
+},
+}
+            );
+        
+    
+            heat_map_2fcba4c3dfd0a6a2463746095118c11e.addTo(feature_group_c28f49fc9fe55f117d26bc91a28521ea);
+        
+    
+            var feature_group_321071ebd801862055fa5fa2509032b4 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_093cbc7478ce939a7dd9848fe64396b7 = L.heatLayer(
+                [[-11.7288817, -49.0817629]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 18,
+  "radius": 18,
+  "blur": 0,
+  "gradient": {
+  0.0: "gray",
+  0.4: "gray",
+  0.75: "gray",
+  1.0: "black",
+},
+}
+            );
+        
+    
+            heat_map_093cbc7478ce939a7dd9848fe64396b7.addTo(feature_group_321071ebd801862055fa5fa2509032b4);
+        
+    
+            var feature_group_3df89ecc892d7c77d54e4fed61a25ce1 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_7f6c77d4c4fc0d1dfda572351649d4dd = L.heatLayer(
+                [[-11.7210366, -49.0738897]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 18,
+  "radius": 18,
+  "blur": 0,
+  "gradient": {
+  0.0: "gray",
+  0.4: "gray",
+  0.75: "gray",
+  1.0: "black",
+},
+}
+            );
+        
+    
+            heat_map_7f6c77d4c4fc0d1dfda572351649d4dd.addTo(feature_group_3df89ecc892d7c77d54e4fed61a25ce1);
+        
+    
+            var feature_group_c50a6972a29688d121e4433ff5a1c22f = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_151b5ab0ffe5517bb41f8f0248905205 = L.heatLayer(
+                [[-11.7343819, -49.05166819999999]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 18,
+  "radius": 18,
+  "blur": 0,
+  "gradient": {
+  0.0: "gray",
+  0.4: "gray",
+  0.75: "gray",
+  1.0: "black",
+},
+}
+            );
+        
+    
+            heat_map_151b5ab0ffe5517bb41f8f0248905205.addTo(feature_group_c50a6972a29688d121e4433ff5a1c22f);
+        
+    
+            var feature_group_c2a5ffea833865edb92e5fe9d1b14bf6 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_e7c2c79fa20268bf895bf1b991a01eec = L.heatLayer(
+                [[-11.7276087, -49.0718326]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 18,
+  "radius": 18,
+  "blur": 0,
+  "gradient": {
+  0.0: "gray",
+  0.4: "gray",
+  0.75: "gray",
+  1.0: "black",
+},
+}
+            );
+        
+    
+            heat_map_e7c2c79fa20268bf895bf1b991a01eec.addTo(feature_group_c2a5ffea833865edb92e5fe9d1b14bf6);
+        
+    
+            var feature_group_0e44f7ae4c877a2d1659659151fea5ee = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_3410c0eca6698bfaa0041f1a33f10386 = L.heatLayer(
+                [[-11.7267064, -49.0665878]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 18,
+  "radius": 18,
+  "blur": 0,
+  "gradient": {
+  0.0: "gray",
+  0.4: "gray",
+  0.75: "gray",
+  1.0: "black",
+},
+}
+            );
+        
+    
+            heat_map_3410c0eca6698bfaa0041f1a33f10386.addTo(feature_group_0e44f7ae4c877a2d1659659151fea5ee);
+        
+    
+            var feature_group_45f1f66a13a3f5d0de15886b89868316 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_46089183932fe7c1db98674dc0af61f6 = L.heatLayer(
+                [[-11.732609, -49.064376]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 18,
+  "radius": 18,
+  "blur": 0,
+  "gradient": {
+  0.0: "gray",
+  0.4: "gray",
+  0.75: "gray",
+  1.0: "black",
+},
+}
+            );
+        
+    
+            heat_map_46089183932fe7c1db98674dc0af61f6.addTo(feature_group_45f1f66a13a3f5d0de15886b89868316);
+        
+    
+            var feature_group_ed0f79155e492a940f6a33d6212da9a5 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_0076e88fc9894a14330b3b3f5ec8b102 = L.heatLayer(
+                [[-11.7458283, -49.0808548]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 18,
+  "radius": 18,
+  "blur": 0,
+  "gradient": {
+  0.0: "gray",
+  0.4: "gray",
+  0.75: "gray",
+  1.0: "black",
+},
+}
+            );
+        
+    
+            heat_map_0076e88fc9894a14330b3b3f5ec8b102.addTo(feature_group_ed0f79155e492a940f6a33d6212da9a5);
+        
+    
+            var feature_group_4893f9282d505c9246996c7b95a9c7da = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_b1cb71958a9c3a55cadc3e263914a228 = L.heatLayer(
+                [[-11.7294375, -49.0826875]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 18,
+  "radius": 18,
+  "blur": 0,
+  "gradient": {
+  0.0: "gray",
+  0.4: "gray",
+  0.75: "gray",
+  1.0: "black",
+},
+}
+            );
+        
+    
+            heat_map_b1cb71958a9c3a55cadc3e263914a228.addTo(feature_group_4893f9282d505c9246996c7b95a9c7da);
+        
+    
+            var feature_group_e0582742c89633329428b8470c822470 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_c0d29f4771d3e9d6611f091ba2fb0c45 = L.heatLayer(
+                [[-11.7453043, -49.06194290000001]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 18,
+  "radius": 18,
+  "blur": 0,
+  "gradient": {
+  0.0: "gray",
+  0.4: "gray",
+  0.75: "gray",
+  1.0: "black",
+},
+}
+            );
+        
+    
+            heat_map_c0d29f4771d3e9d6611f091ba2fb0c45.addTo(feature_group_e0582742c89633329428b8470c822470);
+        
+    
+            var feature_group_2cc56d07d271b7d7fc5008f08d9cced3 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_22c547227cbbd55793dc03a3848936d7 = L.heatLayer(
+                [[-11.7270821, -49.0746104]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 18,
+  "radius": 18,
+  "blur": 0,
+  "gradient": {
+  0.0: "gray",
+  0.4: "gray",
+  0.75: "gray",
+  1.0: "black",
+},
+}
+            );
+        
+    
+            heat_map_22c547227cbbd55793dc03a3848936d7.addTo(feature_group_2cc56d07d271b7d7fc5008f08d9cced3);
+        
+    
+            var feature_group_e54bbd572a6b0e2cbfdfd646f713f536 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_6f789bc0f87234fb9873088d8fdf99d9 = L.heatLayer(
+                [[-11.7296356, -49.0603274]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 18,
+  "radius": 18,
+  "blur": 0,
+  "gradient": {
+  0.0: "gray",
+  0.4: "gray",
+  0.75: "gray",
+  1.0: "black",
+},
+}
+            );
+        
+    
+            heat_map_6f789bc0f87234fb9873088d8fdf99d9.addTo(feature_group_e54bbd572a6b0e2cbfdfd646f713f536);
+        
+    
+            var feature_group_6784d777a53243a9e34cd5041aa02d5d = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_72ea33b1e18eacfa7d3bc33a5af5d687 = L.heatLayer(
+                [[-11.7231886, -49.08437989999999]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 18,
+  "radius": 18,
+  "blur": 0,
+  "gradient": {
+  0.0: "gray",
+  0.4: "gray",
+  0.75: "gray",
+  1.0: "black",
+},
+}
+            );
+        
+    
+            heat_map_72ea33b1e18eacfa7d3bc33a5af5d687.addTo(feature_group_6784d777a53243a9e34cd5041aa02d5d);
+        
+    
+            var feature_group_26e81a22f10c89e936fff344c5471468 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_1dc04c575e3cf92ab834379b9d2f4eb2 = L.heatLayer(
+                [[-11.7225625, -49.08356250000001]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 18,
+  "radius": 18,
+  "blur": 0,
+  "gradient": {
+  0.0: "gray",
+  0.4: "gray",
+  0.75: "gray",
+  1.0: "black",
+},
+}
+            );
+        
+    
+            heat_map_1dc04c575e3cf92ab834379b9d2f4eb2.addTo(feature_group_26e81a22f10c89e936fff344c5471468);
+        
+    
+            var feature_group_e98ef963cb8b3cb1440f0d1ad92e26fe = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_d7012ed5cedef7f23a9705fb5f0e80bd = L.heatLayer(
+                [[-11.7291549, -49.0888267]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 18,
+  "radius": 18,
+  "blur": 0,
+  "gradient": {
+  0.0: "gray",
+  0.4: "gray",
+  0.75: "gray",
+  1.0: "black",
+},
+}
+            );
+        
+    
+            heat_map_d7012ed5cedef7f23a9705fb5f0e80bd.addTo(feature_group_e98ef963cb8b3cb1440f0d1ad92e26fe);
+        
+    
+            var feature_group_64bab43ae81bbe63d245fb16b7d87d7f = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_7dc44b2ba11aacb77b2e10ac072b9ec1 = L.heatLayer(
+                [[-11.7363208, -49.06160819999999]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 18,
+  "radius": 18,
+  "blur": 0,
+  "gradient": {
+  0.0: "gray",
+  0.4: "gray",
+  0.75: "gray",
+  1.0: "black",
+},
+}
+            );
+        
+    
+            heat_map_7dc44b2ba11aacb77b2e10ac072b9ec1.addTo(feature_group_64bab43ae81bbe63d245fb16b7d87d7f);
+        
+    
+            var feature_group_fe890db433de48162369b46cbf0cbcf7 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_d3a1c4ab5063d7f31726314e2c6c14cc = L.heatLayer(
+                [[-11.7452793, -49.0613158]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 18,
+  "radius": 18,
+  "blur": 0,
+  "gradient": {
+  0.0: "gray",
+  0.4: "gray",
+  0.75: "gray",
+  1.0: "black",
+},
+}
+            );
+        
+    
+            heat_map_d3a1c4ab5063d7f31726314e2c6c14cc.addTo(feature_group_fe890db433de48162369b46cbf0cbcf7);
+        
+    
+            var feature_group_3ba2420c162a9f61294dfaa765c3c29c = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_4faff53950911d9b8046f449e4396b78 = L.heatLayer(
+                [[-11.7283752, -49.0686083]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 18,
+  "radius": 18,
+  "blur": 0,
+  "gradient": {
+  0.0: "gray",
+  0.4: "gray",
+  0.75: "gray",
+  1.0: "black",
+},
+}
+            );
+        
+    
+            heat_map_4faff53950911d9b8046f449e4396b78.addTo(feature_group_3ba2420c162a9f61294dfaa765c3c29c);
+        
+    
+            var layer_control_0aa19b5e923f91e0d83582804a733f5e_layers = {
+                base_layers : {
+                    "Gurupi - TO" : tile_layer_edb2450f20a2ce52a5af3b0378696fa0,
+                },
+                overlays :  {
+                    "COLEGIO ADVENTISTA DE GURUPI (813)" : feature_group_730789bd95098397afe003655250a37b,
+                    "COLEGIO BERNARDO SAYAO DE GURUPI (565)" : feature_group_c28f49fc9fe55f117d26bc91a28521ea,
+                    "EDUCANDARIO EVANGELICO EBENEZER (556)" : feature_group_321071ebd801862055fa5fa2509032b4,
+                    "SESC ESCOLA (337)" : feature_group_3df89ecc892d7c77d54e4fed61a25ce1,
+                    "CENTRO EDUCACIONAL GOTINHAS DO SABER LTDA ME (255)" : feature_group_c50a6972a29688d121e4433ff5a1c22f,
+                    "CRECHE ESPIRITA PRE - ESCOLA MARIA MADALENA (252)" : feature_group_c2a5ffea833865edb92e5fe9d1b14bf6,
+                    "COLEGIO GENIUS (247)" : feature_group_0e44f7ae4c877a2d1659659151fea5ee,
+                    "CENTRO EDUCACIONAL DE GURUPI (214)" : feature_group_45f1f66a13a3f5d0de15886b89868316,
+                    "RV EDUCACIONAL LTDA (188)" : feature_group_ed0f79155e492a940f6a33d6212da9a5,
+                    "INSTITUTO EVANGELICO EDUCACIONAL OS PEQUENINOS DE JESUS (182)" : feature_group_4893f9282d505c9246996c7b95a9c7da,
+                    "INSTITUICAO BENEFICENTE IRMA DULCE (165)" : feature_group_e0582742c89633329428b8470c822470,
+                    "ESCOLA SAGRADO CORACAO DE MARIA (144)" : feature_group_2cc56d07d271b7d7fc5008f08d9cced3,
+                    "ESCOLA INFANTIL CANTINHO FELIZ (127)" : feature_group_e54bbd572a6b0e2cbfdfd646f713f536,
+                    "INSTITUTO EDUCACIONAL PASSO A PASSO (122)" : feature_group_6784d777a53243a9e34cd5041aa02d5d,
+                    "CET-SESI CENTRO DE ENS TRAB-SERV SOCIAL DA IND (93)" : feature_group_26e81a22f10c89e936fff344c5471468,
+                    "CENTRO EDUCACIONAL PINGO DE GENTE (91)" : feature_group_e98ef963cb8b3cb1440f0d1ad92e26fe,
+                    "ASSOCIACAO BERCARIO ESPIRITA MARIA DE NAZARE (76)" : feature_group_64bab43ae81bbe63d245fb16b7d87d7f,
+                    "SESCLER - SERVICO SOCIAL DO COMERCIO (65)" : feature_group_fe890db433de48162369b46cbf0cbcf7,
+                    "ASSOCIACAO DE APOIO A ESCOLA ESPECIAL SAO FRANCISCO DE ASSIS (8)" : feature_group_3ba2420c162a9f61294dfaa765c3c29c,
+                },
+            };
+            let layer_control_0aa19b5e923f91e0d83582804a733f5e = L.control.layers(
+                layer_control_0aa19b5e923f91e0d83582804a733f5e_layers.base_layers,
+                layer_control_0aa19b5e923f91e0d83582804a733f5e_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_c0be329cf494623bcbb5d948c730b475);
+
+        
+</script>
+</html>

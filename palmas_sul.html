@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Palmas Sul - Mapa Interativo - DECODE</title>
+
+  <!-- Fonte SFNS Display (fallbacks modernos) -->
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --color-bg: #ffffff;
+      --color-text: #111111;
+      --color-accent: #000000;
+      --color-muted: #666666;
+      --color-border: #e0e0e0;
+      --button-bg: #000000;
+      --button-hover: #333333;
+      --button-text: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      letter-spacing: -0.2px;
+      line-height: 1.5;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      padding-top: 130px;
+    }
+
+    header {
+      background: var(--color-bg);
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      padding: 15px 8%;
+      height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    header h1 a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    /* Logo responsivo */
+    header h1 img {
+      max-height: 100px; /* controla altura máxima */
+      height: auto;
+      width: auto;
+      display: block;
+    }
+
+    main {
+      padding: 2rem 8%;
+      max-width: 1400px;
+      margin: auto;
+      flex: 1;
+      width: 100%;
+    }
+
+    nav {
+      margin-bottom: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    nav .button {
+      border-radius: 0.75rem;
+      background: var(--button-bg);
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+      color: var(--button-text);
+      padding: 0.75rem 1.5rem;
+      text-transform: none;
+      cursor: pointer;
+      border: none;
+      transition: background 0.25s ease, transform 0.15s ease;
+    }
+
+    nav .button:hover {
+      background: var(--button-hover);
+      transform: translateY(-2px);
+    }
+
+    iframe {
+      width: 100%;
+      height: 75vh;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      background-color: #fff;
+      display: block;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    footer {
+      background-color: var(--color-bg);
+      color: var(--color-muted);
+      padding: 1.5rem 8%;
+      text-align: center;
+      font-size: 0.85rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    footer a {
+      color: var(--color-text);
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* === HEADER E NAV MOBILE === */
+    @media (max-width: 768px) {
+
+        body {
+            padding-top: 55px; /* altura do header no celular */
+        }
+
+        /* Header responsivo */
+        header {
+            padding: 8px 5%;          /* padding menor, respira mas aproxima os elementos */
+            height: auto;             /* flexível */
+            flex-direction: column;   /* logo acima, nav abaixo */
+            align-items: flex-start;  
+            justify-content: center;  
+            gap: 0.15rem;             /* distância mínima entre logo e nav */
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        /* Logo responsivo */
+        header h1 img {
+            max-height: 50px;         /* reduz o logo para celular */
+            width: auto;
+            display: block;
+        }
+
+        /* Navegação vertical e próxima do logo */
+        nav {
+            margin-top: 0;            /* remove distância extra */
+            flex-direction: column;  
+            gap: 0.5rem;              /* espaço elegante entre botões */
+            width: 100%;              
+        }
+
+        nav .button {
+            width: 100%;              /* botões ocupam toda largura */
+            padding: 0.7rem 1rem;     /* menor padding para celular */
+            font-size: 0.9rem;        
+        }
+    }
+    
+
+    /* === MODO PAISAGEM NO CELULAR === */
+    @media screen and (orientation: landscape) and (max-height: 500px) {
+      header, footer, nav {
+        display: none !important;
+      }
+
+      body {
+        padding-top: 0 !important;
+      }
+
+      main {
+        padding: 0;
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      iframe {
+        width: 100vw;
+        height: 100vh;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>
+      <a href="#">
+        <img src="img/logo_decode.svg" alt="DECODE">
+      </a>
+    </h1>
+  </header>
+
+  <main>
+    <nav>
+      <button class="button" onclick="carregarMapa('mapa_completo_Palmas_Palmas Sul_otimizado.html')">Palmas Sul</button>
+      <button class="button" onclick="carregarMapa('busca_escolas/mapa_escolas_Palmas_TO.html')">Busca Escolas</button>
+    </nav>
+
+    <iframe id="map-container" frameborder="0"></iframe>
+
+    <script>
+      const iframe = document.getElementById('map-container');
+      const timestamp = new Date().getTime();
+      iframe.src = `mapa_completo_Palmas_Palmas Sul_otimizado.html?v=${timestamp}`;
+    </script>
+  </main>
+
+  <footer>
+    © 2025 <a href="#">DECODE</a>. Todos os direitos reservados.
+  </footer>
+
+  <script>
+    function carregarMapa(arquivo) {
+      const timestamp = new Date().getTime();
+      document.getElementById('map-container').src = `${arquivo}?v=${timestamp}`;
+    }
+  </script>
+
+</body>
+</html>
